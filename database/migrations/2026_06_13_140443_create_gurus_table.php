@@ -1,28 +1,40 @@
-public function up(): void
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
 {
-    Schema::create('gurus', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('gurus', function (Blueprint $table) {
+            $table->id();
 
-        $table->id();
+            $table->string('nama');
+            $table->enum('jk', ['L', 'P']);
+            $table->string('tempat');
+            $table->date('tgl_lahir');
 
-        $table->string('nama');
-        $table->string('jk');
-        $table->string('tempat');
-        $table->string('tgl_lahir');
+            $table->string('jabatan');
+            $table->date('tmt');
 
-        $table->string('jabatan');
-        $table->string('tmt');
+            $table->string('ijazah');
+            $table->string('jurusan');
+            $table->year('tahun');
 
-        $table->string('ijazah');
-        $table->string('jurusan');
-        $table->string('tahun');
+            $table->string('perguruan_tinggi')->nullable();
 
-        $table->string('perguruan_tinggi')->nullable();
+            $table->string('bidang_studi');
+            $table->text('alamat');
+            $table->string('status');
 
-        $table->string('bidang_studi');
-        $table->string('alamat');
-        $table->string('status');
+            $table->timestamps();
+        });
+    }
 
-        $table->timestamps();
-
-    });
-}
+    public function down(): void
+    {
+        Schema::dropIfExists('gurus');
+    }
+};
